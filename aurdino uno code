@@ -1,0 +1,46 @@
+int sensorPin=A4;
+int sensorData;
+void setup()
+{  
+  Serial.begin(9600);   
+  pinMode(sensorPin,INPUT);                         
+ }
+void loop()
+{
+  sensorData = analogRead(sensorPin); 
+  sensorData= sensorData/4.5;
+        
+  Serial.print("Air Quality:");
+  Serial.print(sensorData, DEC);               
+  Serial.println(" PPM");
+
+  if((sensorData>60)&&(sensorData<=120))
+  {
+  Serial.println("AQI Status : Moderate");
+  
+    }
+    
+  else if((sensorData>120)&&(sensorData<=300))
+  {
+  Serial.println("AQI Status : Unhealthy to Breath");
+  
+    }
+    else if((sensorData>300)&&(sensorData<=500))
+  {
+  Serial.println("AQI Status : Harmfull");
+  
+    }
+    else if((sensorData>500))
+  {
+  Serial.println("AQI Status : Danger");
+  
+    }
+    else
+    {
+       Serial.println("AQI Status : Safe to Breath");
+  
+      }
+    
+  
+  delay(2000);                                   
+}
